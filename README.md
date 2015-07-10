@@ -49,18 +49,25 @@ Utilities to make life easier on settings and other needs during development wit
    ```
 * validateCpf(string): boolean
    - validate cpf function, return true if it's valid and false if it's invalid
+
 * validateCnpj(string): boolean
    - validate cnpj function, return true if it's valid and false if it's invalid
+
 * ngMaskDefaultAlias: object
    - return default alias masks from angular-ngMask
+
 * enableCors($httpProvider)
    - configure $httpProvider to enable cors
+
 * fixIISHttpHeaders($httpProvider)
    - configure $httpProvider to fix existent problem in IIS when If-Modified-Since is "0"
+
 * configureRestangular(RestangularProvider)
    - configure Restangular to enable put method and an interceptor to handle binary response or paginated response data.
+
 * applyExceptionHandler(handler)
    - set an exception javascript handler with detault messages for same situations. Param handler can be used to apply custom messages.
+
 * applyModelStateMessages(response, defaultMessage)
    - this function check if the response has model state and apply the field messages, if it's exists, or return a message list to show. If has not model state return defaultMessage.
 
@@ -68,6 +75,7 @@ Utilities to make life easier on settings and other needs during development wit
 
 * appSlimScroll
    - apply jquery slim scroll plugin on element
+
 * appValidateEquals
    - apply a validate equals between two fields, emit flag "equal" on ngModel
    ```html
@@ -76,6 +84,7 @@ Utilities to make life easier on settings and other needs during development wit
    ```
 * appFullScreenPage
    - should be used on first element of page to shows its full screen. This directive apply body-wide on body element.
+
 * appDynamicDirective
    - this directive can be used to apply another directive dynamically
    ```html
@@ -83,6 +92,7 @@ Utilities to make life easier on settings and other needs during development wit
    ```
 * appInterpolateFormat
    - this directive can be used to process a dynamic expression using $interpolate
+
 * appAsyncValidate
    - this directive can be used to apply async validate, for example if your validate is processed with rest api.
    ```html
@@ -110,8 +120,10 @@ Utilities to make life easier on settings and other needs during development wit
    <tr ng-repeat="item in items | selected:'boolFieldName'">
    ```
    - in this case will be repeated only items where 'boolFieldName' is equals to 'true'
+
 * boolToText
    - translate boolean to text (Yes/No)
+
 * translate:identifier:value
    - this filter can be used to translate values, it's similar to oracle translate.
    ```html
