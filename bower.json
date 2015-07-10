@@ -5,7 +5,7 @@
   "authors": [
     "Fábio Henrique da Silva Viana <fabiohsv@ciandt.com>"
   ],
-  "description": "utilities component written in angularjs",
+  "description": "Utilities to make life easier on settings and other needs during development with angularjs.",
   "main": ["utilities.js", "utilities-directives.js", "utilities-filters.js"],
   "dependencies": {
 	"ciandt-components-dialogs": "*"
@@ -38,7 +38,8 @@
 	"asyncvalidate",
 	"async validate",
 	"async validate directive",
-	"enter"
+	"enter",
+	"If-Modified-Since"
   ],
   "license": "MIT"
 }

@@ -11,9 +11,9 @@ Utilities to make life easier on settings and other needs during development wit
 * Add utilities.js, utilities-filters.js and utilities-directives.js to your code:
 
    ```html
-   <script src='assets/libs/ciandt-components-utilities/utilities.js'></script>
    <script src='assets/libs/ciandt-components-utilities/utilities-filters.js'></script>
    <script src='assets/libs/ciandt-components-utilities/utilities-directives.js'></script>
+   <script src='assets/libs/ciandt-components-utilities/utilities.js'></script>
    ```
    - note that the base directory used was assets/libs, you should change bower_components to assets/libs or move from bower_components to assets/libs with grunt.
 * Include module dependency:
@@ -25,7 +25,8 @@ Utilities to make life easier on settings and other needs during development wit
 
 ### How To Use
 
-1. **ciandt.components.utilities.Utilities Functions**
+1. **Functions**
+   - first step: inject ciandt.components.utilities.Utilities in your component to can use functions below.
 
 * wrapElement(element, content, prepend): element content
    - this function wrap element into content. The param "prepend" indicate if element will be inserted in top or bottom content children.
@@ -79,11 +80,11 @@ Utilities to make life easier on settings and other needs during development wit
 * appValidateEquals
    - apply a validate equals between two fields, emit flag "equal" on ngModel
    ```html
-   <input ng-model=password>
-   <input ng-model=confirmPassword app-validate-equals="password">
+   <input ng-model="password">
+   <input ng-model="confirmPassword" app-validate-equals="password">
    ```
 * appFullScreenPage
-   - should be used on first element of page to shows its full screen. This directive apply body-wide on body element.
+   - should be used on first element of page to shows its full screen. This directive apply body-wide css class on body element.
 
 * appDynamicDirective
    - this directive can be used to apply another directive dynamically
@@ -96,7 +97,7 @@ Utilities to make life easier on settings and other needs during development wit
 * appAsyncValidate
    - this directive can be used to apply async validate, for example if your validate is processed with rest api.
    ```html
-   <input ng-model=cpf app-async-validate="checkCpf" app-async-validate-message="CPF already used in another user">
+   <input ng-model="cpf" app-async-validate="checkCpf" app-async-validate-message="CPF already used in another user">
    ```
    ```javascript
    app.controller('yourCtrl', [function($scope, $http){
