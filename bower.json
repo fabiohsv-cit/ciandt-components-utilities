@@ -1,0 +1,44 @@
+{
+  "name": "ciandt-components-utilities",
+  "version": "0.0.1",
+  "homepage": "https://github.com/fabiohsv-cit/ciandt-components-utilities",
+  "authors": [
+    "Fábio Henrique da Silva Viana <fabiohsv@ciandt.com>"
+  ],
+  "description": "utilities component written in angularjs",
+  "main": ["utilities.js", "utilities-directives.js", "utilities-filters.js"],
+  "dependencies": {
+	"ciandt-components-dialogs": "*"
+  },
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "angular",
+    "utilities",
+	"cors",
+	"cpf",
+	"cnpj",
+	"IIS",
+	"exceptionhandler",
+	"exception handler",
+	"modelstate",
+	"model state",
+	"translate",
+	"boolean to text",
+	"capitalize",
+	"validateequals",
+	"validate equals",
+	"fullscreen",
+	"full screen",
+	"dynamicdirective",
+	"dynamic directive",
+	"interpolate",
+	"interpolate directive",
+	"asyncvalidate",
+	"async validate",
+	"async validate directive",
+	"enter"
+  ],
+  "license": "MIT"
+}
