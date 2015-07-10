@@ -26,10 +26,10 @@ Utilities to make life easier on settings and other needs during development wit
 ### How To Use
 
 1. **Functions**
-   - first step: inject ciandt.components.utilities.Utilities in your component to can use functions below.
+   - first step: inject ciandt.components.utilities.Utilities in your component so you can use functions below.
 
 * wrapElement(element, content, prepend): element content
-   - this function wrap element into content. The param "prepend" indicate if element will be inserted in top or bottom content children.
+   - this function wraps "element" inside "content". The parameter "prepend" indicate if the element will be placed above or below content's children.
    
    ```javascript
    app.directive("yourDirective", ['ciandt.components.utilities.Utilities', function (Utilities) {
@@ -55,7 +55,7 @@ Utilities to make life easier on settings and other needs during development wit
    - validate cnpj function, return true if it's valid and false if it's invalid
 
 * ngMaskDefaultAlias: object
-   - return default alias masks from angular-ngMask
+   - return the default alias masks from angular-ngMask
 
 * enableCors($httpProvider)
    - configure $httpProvider to enable cors
@@ -64,13 +64,13 @@ Utilities to make life easier on settings and other needs during development wit
    - configure $httpProvider to fix existent problem in IIS when If-Modified-Since is "0"
 
 * configureRestangular(RestangularProvider)
-   - configure Restangular to enable put method and an interceptor to handle binary response or paginated response data.
+   - configure Restangular to enable put method and an interceptor to handle binary or paginated response data.
 
 * applyExceptionHandler(handler)
-   - set an exception javascript handler with detault messages for same situations. Param handler can be used to apply custom messages.
+   - set a javascript exception handler with standard messages for some situations. Parameter handler can be used to apply custom messages.
 
 * applyModelStateMessages(response, defaultMessage)
-   - this function check if the response has model state and apply the field messages, if it's exists, or return a message list to show. If has not model state return defaultMessage.
+   - this function checks if the response has a model state and apply the field messages, if it exists, or return a message list to show. If it doesn't have a model state return defaultMessage.
 
 2. **Directives**
 
@@ -78,13 +78,13 @@ Utilities to make life easier on settings and other needs during development wit
    - apply jquery slim scroll plugin on element
 
 * appValidateEquals
-   - apply a validate equals between two fields, emit flag "equal" on ngModel
+   - sets an "equals" valdation between two fields, emit flag "equal" on ngModel
    ```html
    <input ng-model="password">
    <input ng-model="confirmPassword" app-validate-equals="password">
    ```
 * appFullScreenPage
-   - should be used on first element of page to shows its full screen. This directive apply body-wide css class on body element.
+   - should be used on first element of a page to show it in full screen. This directive apply body-wide css class on body element.
 
 * appDynamicDirective
    - this directive can be used to apply another directive dynamically
@@ -95,9 +95,9 @@ Utilities to make life easier on settings and other needs during development wit
    - this directive can be used to process a dynamic expression using $interpolate
 
 * appAsyncValidate
-   - this directive can be used to apply async validate, for example if your validate is processed with rest api.
+   - this directive can be used to apply asynchronous validation, for example if your validation is processed with rest api.
    ```html
-   <input ng-model="cpf" app-async-validate="checkCpf" app-async-validate-message="CPF already used in another user">
+   <input ng-model="cpf" app-async-validate="checkCpf" app-async-validate-message="CPF already used by another user">
    ```
    ```javascript
    app.controller('yourCtrl', [function($scope, $http){
@@ -111,19 +111,19 @@ Utilities to make life easier on settings and other needs during development wit
    }
    ```
 * appEnter
-   - this directive can be used to process a controller method setted on enter pressed.
+   - this directive can be used to run a chosen controller method when the enter key is pressed.
 
 3. **Filters**
 
 * selected:boolFieldName
-   - this filter can be used to select the objects on informed list where the field setted in filter is true
+   - this filter can be used to select the objects on the given list where the chosen field is true
    ```html
    <tr ng-repeat="item in items | selected:'boolFieldName'">
    ```
-   - in this case will be repeated only items where 'boolFieldName' is equals to 'true'
+   - in this case, only items where 'boolFieldName' is equals to 'true' will be repeated
 
 * boolToText
-   - translate boolean to text (Yes/No)
+   - translates boolean to text (Yes/No)
 
 * translate:identifier:value
    - this filter can be used to translate values, it's similar to oracle translate.
@@ -131,4 +131,4 @@ Utilities to make life easier on settings and other needs during development wit
    {{value:translate:1:'Value 1':2:'Value 2'}}
    ```
 * capitalize:text
-   - this filter apply upper case on first letter
+   - this filter change the first letter to upper case
