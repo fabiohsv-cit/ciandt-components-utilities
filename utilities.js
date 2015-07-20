@@ -254,7 +254,7 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
                 angular.forEach(response.modelState, function (value, key) {
                     var element = jQuery('#' + key.replace('\.', '\\.') + ',[name="' + key.replace('\.', '\\.') + '"]');
                     if (element.length > 0) {
-                        element.data('app-custom-errors', value);
+                        element.data('app-modelstate-errors', value);
                         element.addClass('ng-dirty');
                     } else {
                         message.push({ 'message': value, 'type': 'text-danger' });
@@ -271,11 +271,11 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
 
         this.applyValidationTooltip = function (scope, element, attrs, ngModel) {
             element.on('change click input paste keyup', function () {
-                element.removeData('app-custom-errors');
+                element.removeData('app-modelstate-errors');
             });
 
             scope.$watch(function () {
-                return (ngModel.$dirty && ngModel.$invalid) || angular.isDefined(element.data('app-custom-errors'));
+                return (ngModel.$dirty && ngModel.$invalid) || angular.isDefined(element.data('app-modelstate-errors'));
             }, function (value) {
                 var tooltip = element.data('bs.tooltip');
                 if (value) {
@@ -309,7 +309,7 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
                                         message = attrs.appAsyncValidateMessage;
                                     }
                                     if (!message) {
-                                        message = element.data('app-custom-errors');
+                                        message = element.data('app-modelstate-errors');
                                         if (!message) {
                                             message = attrs[error + 'Message'];
                                             if (message && message.indexOf('{{') >= 0) {
