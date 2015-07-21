@@ -114,5 +114,53 @@ define(['slimscroll', 'angular'], function (app) {
                 }
             });
         };
-    });
+    }).directive('appDependsOn', ['$log', function ($log) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                element.attr("readonly", "true");
+
+                var dependsOn = attrs.appDependsOn;
+                if (dependsOn == "") {
+                    $log.error("A diretiva DependsOn precisa de conteúdo válido para funcionar corretamente. Elemento não carregado.")
+                    return false;
+                }
+
+                var dataListeners = [];
+                angular.forEach((dependsOn.split(';')), function (value) {
+                    this.push(value.trim());
+                }, dataListeners);
+                var checkList = {};
+
+                angular.forEach(dataListeners, function (listener) {
+                    checkList[listener] = false;
+
+                    scope.$watch(listener, function (newValue, oldValue) {
+                        scope.$eval(attrs.ngModel + '=null');
+                        if (scope.$eval(listener)) {
+                            checkList[listener] = true;
+                        } else {
+                            checkList[listener] = false;
+                        }
+
+                        if (scanCheckList(checkList)) {
+                            element.removeAttr("readonly");
+                        } else {
+                            element.attr("readonly", "true");
+                        }
+                    })
+                });
+
+                function scanCheckList(list) {
+                    var flag = true;
+                    angular.forEach(list, function (value, key) {
+                        if (!value) {
+                            flag = false;
+                        }
+                    })
+                    return flag;
+                };
+            }
+        };
+    }]);
 });
