@@ -24,7 +24,7 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
             'cnpj': 'CNPJ informado é inválido.',
             'default': 'Conteúdo do campo é inválido.'
         }
-    }).provider('ciandt.components.utilities.Utilities', ['$provide', 'ciandt.components.utilities.UtilitiesConfig', function ($provide, UtilitiesConfig) {
+    }).provider('ciandt.components.utilities.Utilities', ['$provide', 'ciandt.components.utilities.UtilitiesConfig', '$interpolate', function ($provide, UtilitiesConfig, $interpolate) {
         var $log = angular.injector(['ng']).get('$log');
 
         var $this = this;
@@ -283,7 +283,6 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
                         return element.data('bs.tooltip');
                     }, function (value) {
                         if (!value && !_.isEmpty(ngModel.$error)) {
-                            $log.debug('Cria tooltip e adiciona eventos.');
                             element.tooltip({ trigger: 'manual', container: 'body' });
                             element.on('focus.tooltipError mouseenter.tooltipError', function () {
                                 var _tooltip = element.data('bs.tooltip');
@@ -322,7 +321,7 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
                                 }
 
                                 // interpolate message
-                                message = $interpolate(message)(attrs);
+                                message = $interpolate(message)(angular.extend({}, scope, attrs));
 
                                 if (!_tooltip.tip().hasClass('in') || _tooltip.options.title != message) {
                                     _tooltip.options.title = message;
@@ -347,7 +346,6 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
                     });
                 } else
                 if (tooltip) {
-                    $log.debug('Destroi tooltip.');
                     element.unbind('focus.tooltipError mouseenter.tooltipError blur.tooltipError mouseleave.tooltipError');
                     element.tooltip('destroy');
                 }
