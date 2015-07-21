@@ -24,8 +24,9 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
             'cnpj': 'CNPJ informado é inválido.',
             'default': 'Conteúdo do campo é inválido.'
         }
-    }).provider('ciandt.components.utilities.Utilities', ['$provide', 'ciandt.components.utilities.UtilitiesConfig', '$interpolate', function ($provide, UtilitiesConfig, $interpolate) {
+    }).provider('ciandt.components.utilities.Utilities', ['$provide', 'ciandt.components.utilities.UtilitiesConfig', function ($provide, UtilitiesConfig) {
         var $log = angular.injector(['ng']).get('$log');
+        var $interpolate = angular.injector(['ng']).get('$interpolate');
 
         var $this = this;
 
@@ -230,12 +231,12 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
                         if (exception && exception.message && exception.message.indexOf('$injector') > -1) {
                             message = 'Ocorreu algum erro desconhecido durante carregamento da página.';
                         } else
-                        if (exception && exception.message && exception.message.indexOf('$compile:tpload')) {
-                            // erro já tratado no handler http, trata-se de pagina template não encontrado.
-                            return;
-                        } else {
-                            message = 'Ocorreu algum erro desconhecido de script.';
-                        }
+                            if (exception && exception.message && exception.message.indexOf('$compile:tpload')) {
+                                // erro já tratado no handler http, trata-se de pagina template não encontrado.
+                                return;
+                            } else {
+                                message = 'Ocorreu algum erro desconhecido de script.';
+                            }
                     }
 
                     try {
@@ -311,9 +312,7 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
                                         message = element.data('app-modelstate-errors');
                                         if (!message) {
                                             message = attrs[error + 'Message'];
-                                            if (message && message.indexOf('{{') >= 0) {
-                                                message = $interpolate(message)(scope);
-                                            } else {
+                                            if (!message) {
                                                 message = UtilitiesConfig.validationMessages.default;
                                             }
                                         }
@@ -345,10 +344,10 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
                         }
                     });
                 } else
-                if (tooltip) {
-                    element.unbind('focus.tooltipError mouseenter.tooltipError blur.tooltipError mouseleave.tooltipError');
-                    element.tooltip('destroy');
-                }
+                    if (tooltip) {
+                        element.unbind('focus.tooltipError mouseenter.tooltipError blur.tooltipError mouseleave.tooltipError');
+                        element.tooltip('destroy');
+                    }
             });
         };
 
