@@ -270,7 +270,7 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
             return message;
         };
 
-        this.applyValidationTooltip = function (scope, element, attrs, ngModel) {
+        this.applyValidationTooltip = function (scope, element, attrs, ngModel, localize) {
             element.on('change click input paste keyup', function () {
                 element.removeData('app-modelstate-errors');
             });
@@ -323,7 +323,7 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
                                 message = $interpolate(message)(angular.extend({}, scope, attrs));
 
                                 if (!_tooltip.tip().hasClass('in') || _tooltip.options.title != message) {
-                                    _tooltip.options.title = message;
+                                    _tooltip.options.title = (localize ? localize.get(message) : message);
                                     if ((window.innerWidth || document.documentElement.clientWidth) < 995) {
                                         _tooltip.options.placement = 'top';
                                     } else {
@@ -351,6 +351,18 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
             });
         };
 
+        this.getLocalStorage = function (id) {
+            return JSON.parse(localStorage.getItem(id));
+        };
+
+        this.setLocalStorage = function (id, obj) {
+            return localStorage.setItem(id, JSON.stringify(obj));
+        };
+
+        this.removeLocalStorage = function (id) {
+            return localStorage.removeItem(id);
+        };
+
         this.$get = [function () {
             return {
                 wrapElement: $this.wrapElement,
@@ -371,7 +383,13 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
 
                 applyModelStateMessages: $this.applyModelStateMessages,
 
-                applyValidationTooltip: $this.applyValidationTooltip
+                applyValidationTooltip: $this.applyValidationTooltip,
+
+                getLocalStorage: $this.getLocalStorage,
+
+                setLocalStorage: $this.setLocalStorage,
+
+                removeLocalStorage: $this.removeLocalStorage
             };
         }];
 
