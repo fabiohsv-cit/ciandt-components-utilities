@@ -15,7 +15,7 @@ define(['slimscroll', 'angular'], function (app) {
             require: "ngModel",
             link: function (scope, ele, attrs, ngModelCtrl) {
                 var me = attrs.ngModel;
-                var matchTo = attrs.validateEquals;
+                var matchTo = attrs.appValidateEquals;
 
                 scope.$watch(me, function (value) {
                     if (value) {
