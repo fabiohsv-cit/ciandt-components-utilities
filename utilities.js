@@ -271,6 +271,11 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
         };
 
         this.applyValidationTooltip = function (scope, element, attrs, ngModel, localize) {
+			if (!ngModel) {
+				$log.debug('ngModel não definido, tooltip não aplicado ao elemento: ' + element);
+				return false;
+			}
+			
             element.on('change click input paste keyup', function () {
                 element.removeData('app-modelstate-errors');
             });
@@ -349,6 +354,7 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
                         element.tooltip('destroy');
                     }
             });
+			return true;
         };
 
         this.getLocalStorage = function (id) {

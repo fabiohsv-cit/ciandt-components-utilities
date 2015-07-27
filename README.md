@@ -75,6 +75,15 @@ Utilities to make life easier on settings and other needs during development wit
 * applyValidationTooltip(scope, element, attrs, ngModel)
    - this function apply in the element a tooltip to show validation errors.
 
+* getLocalStorage(id)
+   - this function gets the object stored with id
+
+* setLocalStorage(id, obj)
+   - this function save the object with id
+
+* removeLocalStorage(id)
+   - this function remove the object stored with id
+
 2. **Directives**
 
 * appSlimScroll
