@@ -334,7 +334,6 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
                                     } else {
                                         _tooltip.options.placement = 'right';
                                     }
-                                    element.next().remove();
                                     element.tooltip('show');
                                 }
                             });
