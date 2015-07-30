@@ -134,9 +134,9 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
         this.ngMaskDefaultAlias = {
             'int': function (value) {
                 if (typeof value == 'object') {
-                    value.repeat = '999';
+                    value.repeat = '22';
                 }
-                return '9';
+                return '9?';
             },
             'cpf': {
                 mask: '999.999.999-99',
