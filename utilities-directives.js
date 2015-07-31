@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 define(['slimscroll', 'angular'], function (app) {
-    angular.module("jedi.utilities.directives", []).directive("appSlimScroll", [function () {
+    angular.module("jedi.utilities.directives", []).directive("jdSlimScroll", [function () {
         return {
             restrict: "A",
             link: function (scope, ele, attrs) {
@@ -146,7 +146,7 @@ define(['slimscroll', 'angular'], function (app) {
                         } else {
                             element.attr("readonly", "true");
                         }
-                    })
+                    });
                 });
 
                 function scanCheckList(list) {
@@ -155,9 +155,9 @@ define(['slimscroll', 'angular'], function (app) {
                         if (!value) {
                             flag = false;
                         }
-                    })
+                    });
                     return flag;
-                };
+                }
             }
         };
     }]);
