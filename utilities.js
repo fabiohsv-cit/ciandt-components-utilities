@@ -1,12 +1,12 @@
 ﻿'use strict';
 
-define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-filters', 'ciandt-components-dialogs'], function () {
+define(['ng-jedi-utilities-directives', 'ng-jedi-utilities-filters', 'ng-jedi-dialogs'], function () {
 
-    angular.module('ciandt.components.utilities', ['ciandt.components.dialogs',
-                                                'ciandt.components.utilities.directives',
-                                                'ciandt.components.utilities.filters']);
+    angular.module('jedi.utilities', ['jedi.dialogs',
+                                                'jedi.utilities.directives',
+                                                'jedi.utilities.filters']);
 
-    angular.module('ciandt.components.utilities').constant('ciandt.components.utilities.UtilitiesConfig', {
+    angular.module('jedi.utilities').constant('jedi.utilities.UtilitiesConfig', {
         validationMessages: {
             'required': 'Preenchimento obrigatório.',
             'minlength': 'Informe pelo menos {{minLength}} caracteres.',
@@ -24,7 +24,7 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
             'cnpj': 'CNPJ informado é inválido.',
             'default': 'Conteúdo do campo é inválido.'
         }
-    }).provider('ciandt.components.utilities.Utilities', ['$provide', 'ciandt.components.utilities.UtilitiesConfig', function ($provide, UtilitiesConfig) {
+    }).provider('jedi.utilities.Utilities', ['$provide', 'jedi.utilities.UtilitiesConfig', function ($provide, UtilitiesConfig) {
         var $log = angular.injector(['ng']).get('$log');
         var $interpolate = angular.injector(['ng']).get('$interpolate');
 
@@ -240,7 +240,7 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
                     }
 
                     try {
-                        var alertHelper = $injector.get('ciandt.components.dialogs.AlertHelper');
+                        var alertHelper = $injector.get('jedi.dialogs.AlertHelper');
                         alertHelper.addError(message);
                     } catch (e) {
                         alert(message);
@@ -255,7 +255,7 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
                 angular.forEach(response.modelState, function (value, key) {
                     var element = jQuery('#' + key.replace('\.', '\\.') + ',[name="' + key.replace('\.', '\\.') + '"]');
                     if (element.length > 0) {
-                        element.data('app-modelstate-errors', value);
+                        element.data('jd-modelstate-errors', value);
                         element.addClass('ng-dirty');
                     } else {
                         message.push({ 'message': value, 'type': 'text-danger' });
@@ -277,11 +277,11 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
 			}
 			
             element.on('change click input paste keyup', function () {
-                element.removeData('app-modelstate-errors');
+                element.removeData('jd-modelstate-errors');
             });
 
             scope.$watch(function () {
-                return (ngModel.$dirty && ngModel.$invalid) || angular.isDefined(element.data('app-modelstate-errors'));
+                return (ngModel.$dirty && ngModel.$invalid) || angular.isDefined(element.data('jd-modelstate-errors'));
             }, function (value) {
                 var tooltip = element.data('bs.tooltip');
                 if (value) {
@@ -310,11 +310,11 @@ define(['ciandt-components-utilities-directives', 'ciandt-components-utilities-f
 
                                 var message = UtilitiesConfig.validationMessages[error];
                                 if (!message) {
-                                    if (error == 'appAsyncValidate') {
-                                        message = attrs.appAsyncValidateMessage;
+                                    if (error == 'jdAsyncValidate') {
+                                        message = attrs.jdAsyncValidateMessage;
                                     }
                                     if (!message) {
-                                        message = element.data('app-modelstate-errors');
+                                        message = element.data('jd-modelstate-errors');
                                         if (!message) {
                                             message = attrs[error + 'Message'];
                                             if (!message) {

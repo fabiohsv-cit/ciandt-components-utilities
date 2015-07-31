@@ -1,14 +1,14 @@
 {
-  "name": "ciandt-components-utilities",
+  "name": "ng-jedi-utilities",
   "version": "0.0.1",
-  "homepage": "https://github.com/fabiohsv-cit/ciandt-components-utilities",
+  "homepage": "https://github.com/ng-jedi/utilities",
   "authors": [
-    "Fábio Henrique da Silva Viana <fabiohsv@ciandt.com>"
+    "Fábio Henrique da Silva Viana <fabioviana.bh@gmail.com>"
   ],
   "description": "Utilities to make life easier on settings and other needs during development with angularjs.",
   "main": ["utilities.js", "utilities-directives.js", "utilities-filters.js"],
   "dependencies": {
-	"ciandt-components-dialogs": "*"
+	"ng-jedi-dialogs": "*"
   },
   "moduleType": [
     "globals"

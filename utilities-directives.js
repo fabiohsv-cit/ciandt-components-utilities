@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 define(['slimscroll', 'angular'], function (app) {
-    angular.module("ciandt.components.utilities.directives", []).directive("appSlimScroll", [function () {
+    angular.module("jedi.utilities.directives", []).directive("appSlimScroll", [function () {
         return {
             restrict: "A",
             link: function (scope, ele, attrs) {
@@ -10,12 +10,12 @@ define(['slimscroll', 'angular'], function (app) {
                 });
             }
         };
-    }]).directive("appValidateEquals", [function () {
+    }]).directive("jdValidateEquals", [function () {
         return {
             require: "ngModel",
             link: function (scope, ele, attrs, ngModelCtrl) {
                 var me = attrs.ngModel;
-                var matchTo = attrs.appValidateEquals;
+                var matchTo = attrs.jdValidateEquals;
 
                 scope.$watch(me, function (value) {
                     if (value) {
@@ -30,7 +30,7 @@ define(['slimscroll', 'angular'], function (app) {
                 });
             }
         }
-    }]).directive("appFullScreenPage", function () {
+    }]).directive("jdFullScreenPage", function () {
         return {
             restrict: "A",
             controller: ["$scope", "$element", "$location", function ($scope, $element, $location) {
@@ -45,12 +45,12 @@ define(['slimscroll', 'angular'], function (app) {
                 });
             }]
         };
-    }).directive('appDynamicDirective', ['$compile', '$interpolate', function ($compile, $interpolate) {
+    }).directive('jdDynamicDirective', ['$compile', '$interpolate', function ($compile, $interpolate) {
         return {
             restrict: 'A',
             compile: function (element, attrs) {
-                var appDynamicDirective = element.attr('app-dynamic-directive');
-                element.removeAttr('app-dynamic-directive');
+                var appDynamicDirective = element.attr('jd-dynamic-directive');
+                element.removeAttr('jd-dynamic-directive');
                 if (appDynamicDirective) {
                     // remove conteúdo do elemento para aplicar as diretivas e recompilar
                     var children = element.children();
@@ -77,50 +77,48 @@ define(['slimscroll', 'angular'], function (app) {
                 }
             }
         }
-    }]).directive('appInterpolateFormat', ['$interpolate', function ($interpolate) {
+    }]).directive('jdInterpolateFormat', ['$interpolate', function ($interpolate) {
         return {
             restrict: 'A',
             require: 'ngModel',
             link: function (scope, element, attrs, ngModel) {
                 //TODO henriqueb adicionar capacidade de lidar com arrays e etc - improvement
-                var appInterpolateFormat = element.attr('app-interpolate-format');
+                var appInterpolateFormat = element.attr('jd-interpolate-format');
                 ngModel.$formatters.push(function (value) {
                     return $interpolate(appInterpolateFormat)(value);
                 });
             }
         };
-    }]).directive('appAsyncValidate', ['$q', function ($q) {
+    }]).directive('jdAsyncValidate', ['$q', function ($q) {
         return {
             require: 'ngModel',
             link: function (scope, element, attrs, ctrl) {
-                if (attrs.appAsyncValidateMessage) {
-                    ctrl.$asyncValidators.appAsyncValidate = function (modelValue, viewValue) {
-                        return $q(function (resolve, reject) {
-                            scope.$eval(attrs.appAsyncValidate)(modelValue, viewValue, resolve, reject);
-                        });
-                    };
-                }
+                ctrl.$asyncValidators.jdAsyncValidate = function (modelValue, viewValue) {
+                    return $q(function (resolve, reject) {
+                        scope.$eval(attrs.jdAsyncValidate)(modelValue, viewValue, resolve, reject);
+                    });
+                };
             }
         };
-    }]).directive('appEnter', function () {
+    }]).directive('jdEnter', function () {
         return function (scope, element, attrs) {
             element.bind("keydown keypress", function (event) {
                 if (event.which === 13) {
                     scope.$apply(function () {
-                        scope.$eval(attrs.appEnter);
+                        scope.$eval(attrs.jdEnter);
                     });
 
                     event.preventDefault();
                 }
             });
         };
-    }).directive('appDependsOn', ['$log', function ($log) {
+    }).directive('jdDependsOn', ['$log', function ($log) {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
                 element.attr("readonly", "true");
 
-                var dependsOn = attrs.appDependsOn;
+                var dependsOn = attrs.jdDependsOn;
                 if (dependsOn == "") {
                     $log.error("A diretiva DependsOn precisa de conteúdo válido para funcionar corretamente. Elemento não carregado.")
                     return false;
