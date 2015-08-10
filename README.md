@@ -72,9 +72,6 @@ Utilities to make life easier on settings and other needs during development wit
 * applyModelStateMessages(response, defaultMessage)
    - this function checks if the response has a model state and apply the field messages, if it exists, or return a message list to show. If it doesn't have a model state return defaultMessage.
 
-* applyValidationTooltip(scope, element, attrs, ngModel)
-   - this function apply in the element a tooltip to show validation errors.
-
 * getLocalStorage(id)
    - this function gets the object stored with id
 
