@@ -145,17 +145,19 @@ define(['ng-jedi-utilities-directives', 'ng-jedi-utilities-filters', 'ng-jedi-di
                 'Accept': 'application/json,text/plain,text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
-                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Headers': 'Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With, Accept',
                 'Access-Control-Allow-Credendtials': 'true',
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             };
 
             $httpProvider.defaults.useXDomain = true;
-            $httpProvider.defaults.headers.common = headers;
+            angular.forEach(['common', 'get', 'post', 'put', 'patch', 'delete'], function (method) {
+                $httpProvider.defaults.headers[method] = headers;
+            });
         };
 
         this.fixIISHttpHeaders = function ($httpProvider) {
-            angular.forEach(['get', 'post', 'put', 'patch', 'delete'], function (method) {
+            angular.forEach(['common', 'get', 'post', 'put', 'patch', 'delete'], function (method) {
                 if (!$httpProvider.defaults.headers[method]) {
                     $httpProvider.defaults.headers[method] = {};
                 }
