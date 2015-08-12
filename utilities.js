@@ -234,15 +234,16 @@ define(['ng-jedi-utilities-directives', 'ng-jedi-utilities-filters', 'ng-jedi-di
         };
 
         this.applyModelStateMessages = function (response, defaultMessage) {
-            if (response.modelState) {
+            var message;
+            if (response && response.modelState) {
                 message = [];
                 angular.forEach(response.modelState, function (value, key) {
                     var element = jQuery('#' + key.replace('\.', '\\.') + ',[name="' + key.replace('\.', '\\.') + '"]');
                     if (element.length > 0) {
-                        element.data('jd-modelstate-errors', value);
+                        element.data('jd-modelstate-errors', value[0]);
                         element.addClass('ng-dirty');
                     } else {
-                        message.push({ 'message': value, 'type': 'text-danger' });
+                        message.push({ 'message': value[0], 'type': 'text-danger' });
                     }
                 });
                 if (message.length == 0) {
