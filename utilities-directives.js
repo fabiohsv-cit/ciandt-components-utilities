@@ -102,7 +102,7 @@ define(['slimscroll', 'angular'], function (app) {
         };
     }]).directive('jdEnter', function () {
         return function (scope, element, attrs) {
-            element.bind("keydown keypress", function (event) {
+            element.bind("keydown.jdEnter keypress.jdEnter", function (event) {
                 if (event.which === 13) {
                     scope.$apply(function () {
                         scope.$eval(attrs.jdEnter);
@@ -110,6 +110,12 @@ define(['slimscroll', 'angular'], function (app) {
 
                     event.preventDefault();
                 }
+            });
+
+            // destroy
+            // se escopo destruido remove eventos
+            scope.$on('$destroy', function () {
+                element.unbind('keydown.jdEnter keypress.jdEnter');
             });
         };
     }).directive('jdDependsOn', ['$log', function ($log) {
