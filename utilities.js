@@ -146,13 +146,16 @@ define(['ng-jedi-utilities-directives', 'ng-jedi-utilities-filters', 'ng-jedi-di
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
                 'Access-Control-Allow-Headers': 'Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With, Accept',
-                'Access-Control-Allow-Credendtials': 'true',
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                'Access-Control-Allow-Credendtials': 'true'
             };
 
             $httpProvider.defaults.useXDomain = true;
             angular.forEach(['common', 'get', 'post', 'put', 'patch', 'delete'], function (method) {
-                $httpProvider.defaults.headers[method] = headers;
+                if ($httpProvider.defaults.headers[method]) {
+                    angular.extend($httpProvider.defaults.headers[method], headers);
+                } else {
+                    $httpProvider.defaults.headers[method] = headers;
+                }
             });
         };
 
