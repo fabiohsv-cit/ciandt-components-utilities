@@ -141,33 +141,17 @@ define(['ng-jedi-utilities-directives', 'ng-jedi-utilities-filters', 'ng-jedi-di
         this.enableCors = function ($httpProvider) {
             $log.info('Configurando headers padrões para habilizar CORS.');
 
-            var headers = {
-                'Accept': 'application/json,text/plain,text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'],
-                'Access-Control-Allow-Headers': 'Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With, Accept',
-                'Access-Control-Allow-Credendtials': 'true'
-            };
-
             $httpProvider.defaults.useXDomain = true;
-            angular.forEach(['common', 'get', 'post', 'put', 'patch', 'delete'], function (method) {
-                if ($httpProvider.defaults.headers[method]) {
-                    angular.extend($httpProvider.defaults.headers[method], headers);
-                } else {
-                    $httpProvider.defaults.headers[method] = headers;
-                }
+            angular.forEach($httpProvider.defaults.headers, function (header) {
+                delete header['X-Requested-With'];
             });
         };
 
         this.fixIISHttpHeaders = function ($httpProvider) {
-            angular.forEach(['common', 'get', 'post', 'put', 'patch', 'delete'], function (method) {
-                if (!$httpProvider.defaults.headers[method]) {
-                    $httpProvider.defaults.headers[method] = {};
-                }
+            angular.forEach($httpProvider.defaults.headers, function (header) {
                 // quando If-Modified-Since é igual a "0" ocorre erro no IIS
                 // valor 'Thu, 01 Jan 1970 00:00:00 GMT' corresponde a "0"
-                $httpProvider.defaults.headers[method]['If-Modified-Since'] = 'Thu, 01 Jan 1970 00:00:00 GMT';
-                delete $httpProvider.defaults.headers[method]['X-Requested-With'];
+                header['If-Modified-Since'] = 'Thu, 01 Jan 1970 00:00:00 GMT';
             });
         };
 
