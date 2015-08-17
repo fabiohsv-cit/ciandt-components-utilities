@@ -42,5 +42,32 @@ define(['angular'], function () {
         return function (input) {
             return input.charAt(0).toUpperCase() + input.substr(1);
         }
+    }).filter('jdReplaceSpecialChars', function () {
+        var specialChars = [
+            { val: "a", let: "áàãâä" },
+            { val: "e", let: "éèêë" },
+            { val: "i", let: "íìîï" },
+            { val: "o", let: "óòõôö" },
+            { val: "u", let: "úùûü" },
+            { val: "c", let: "ç" },
+            { val: "A", let: "ÁÀÃÂÄ" },
+            { val: "E", let: "ÉÈÊË" },
+            { val: "I", let: "ÍÌÎÏ" },
+            { val: "O", let: "ÓÒÕÔÖ" },
+            { val: "U", let: "ÚÙÛÜ" },
+            { val: "C", let: "Ç" },
+            { val: "", let: "?!()" }
+        ];
+        return function (str) {
+            var $spaceSymbol = '';
+            var regex;
+            var returnString = str;
+            for (var i = 0; i < specialChars.length; i++) {
+                regex = new RegExp("[" + specialChars[i].let + "]", "g");
+                returnString = returnString.replace(regex, specialChars[i].val);
+                regex = null;
+            }
+            return returnString.replace(/\s/g, $spaceSymbol);
+        }
     });
 });
