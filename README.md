@@ -118,7 +118,18 @@ Utilities to make life easier on settings and other needs during development wit
 		 });
 	  }
    }
+   ``` 
+   
+* jdSelectSingle
+   - this directive can be used inside select to auto-select collections with single item.
+   ```html
+   <select jd-input 
+		jd-select-single="baseCtrl.baseModel.items" 
+		jd-options="item as item.name for item in baseCtrl.baseModel.items"
+		ng-model="baseCtrl.baseModel.selectItemModel" 
+		/>
    ```
+  
 * jdEnter
    - this directive can be used to run a chosen controller method when the enter key is pressed.
 
