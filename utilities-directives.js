@@ -166,5 +166,21 @@ define(['slimscroll', 'angular'], function (app) {
                 }
             }
         };
+    }]).directive("jdSelectSingle", ['$timeout', function ($timeout) {
+        return {
+            restrict: "A",
+            require: 'ngModel',
+            link: function (scope, element, attrs, ngModel) {
+                if (element.is('select')) {
+                    scope.$watch(attrs.jdSelectSingle, function singleSelectWatch(newValue, oldValue) {
+                        if (newValue != oldValue && newValue && newValue.length === 1) {
+                            $timeout(function () {
+                                ngModel.$setViewValue(newValue[0]);
+                            }, 1);
+                        }
+                    });
+                }
+            }
+        }
     }]);
 });
