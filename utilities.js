@@ -176,6 +176,7 @@ define(['ng-jedi-utilities-directives', 'ng-jedi-utilities-filters', 'ng-jedi-di
                 if ((operation === "getList" || operation === "post") && data.pageItems && data.totalCount >= 0) {
                     extractedData = data.pageItems;
                     extractedData.totalCount = data.totalCount;
+                    extractedData.pageNo = data.pageNo;
                 }
                 else if (data instanceof ArrayBuffer) {
                     extractedData.data = data;
