@@ -121,7 +121,7 @@ Utilities to make life easier on settings and other needs during development wit
    ``` 
    
 * jdSelectSingle
-   - this directive can be used inside <select/> tag to auto-select the first item in collections that only have a single item. (require ngModel)
+   - this directive can be used inside `<select/>` tag to auto-select the first item in collections that only have a single item. (require ngModel)
    ```html
    <select jd-input 
 		jd-select-single="baseCtrl.baseModel.items" 
