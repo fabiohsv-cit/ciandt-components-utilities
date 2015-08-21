@@ -26,7 +26,7 @@ define(['ng-jedi-utilities-directives', 'ng-jedi-utilities-filters', 'ng-jedi-di
         this.validateCpf = function (strCPF) {
             var add, i, rev;
             strCPF = strCPF.replace(/[^\d]+/g, '');
-            if (strCPF == '') return false;
+            if (strCPF === '') return true;
             // Elimina CPFs invalidos conhecidos    
             if (strCPF.length != 11 ||
                 strCPF == "00000000000" ||
