@@ -176,7 +176,7 @@ define(['slimscroll', 'angular'], function (app) {
                         if (newValue != oldValue && newValue && newValue.length === 1) {
                             $timeout(function () {
                                 ngModel.$setViewValue(newValue[0]);
-                            }, 1);
+                            }, 300);
                         }
                     });
                 }
