@@ -64,7 +64,7 @@ define(['ng-jedi-utilities-directives', 'ng-jedi-utilities-filters', 'ng-jedi-di
         this.validateCnpj = function (strCNPJ) {
             var tamanho, numeros, i, digitos, soma, pos, resultado;
             strCNPJ = strCNPJ.replace(/[^\d]+/g, '');
-            if (strCNPJ == '') return false;
+            if (strCNPJ === '') return true;
 
             if (strCNPJ.length != 14)
                 return false;
