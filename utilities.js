@@ -243,6 +243,23 @@ define(['ng-jedi-utilities-directives', 'ng-jedi-utilities-filters', 'ng-jedi-di
             return message;
         };
 
+        this.bindFirst = function (element, eventName, eventFunc) {
+            var events = $._data(element[0], "events");
+            if (events && events[eventName]) {
+                events = events[eventName].slice(0);
+            } else {
+                events = [];
+            }
+
+            element.unbind(eventName);
+
+            element.on(eventName, eventFunc);
+
+            angular.forEach(events, function (event) {
+                element.on(eventName, event.handler);
+            });
+        };
+
         this.getLocalStorage = function (id) {
             return JSON.parse(localStorage.getItem(id));
         };
@@ -275,6 +292,8 @@ define(['ng-jedi-utilities-directives', 'ng-jedi-utilities-filters', 'ng-jedi-di
 
                 applyModelStateMessages: $this.applyModelStateMessages,
 
+                bindFirst: $this.bindFirst,
+
                 getLocalStorage: $this.getLocalStorage,
 
                 setLocalStorage: $this.setLocalStorage,
@@ -283,6 +302,27 @@ define(['ng-jedi-utilities-directives', 'ng-jedi-utilities-filters', 'ng-jedi-di
             };
         }];
 
+    }]);
+
+    angular.module('jedi.utilities').factory('jedi.utilities.DisableInterceptor', ['$q', function ($q) {
+        return {
+            response: function (response) {
+                if (response && response.config && response.config.headers && response.config.headers['Content-Type'] && (response.config.headers['Content-Type'].toLowerCase().indexOf('json') >= 0 || response.config.headers['Content-Type'].toLowerCase().indexOf('form') >= 0)) {
+                    $('[jd-disable-on]').removeAttr('disabled');
+                }
+                return response || $q.when(response);
+            },
+            responseError: function (rejection) {
+                if (rejection && rejection.config && rejection.config.headers && rejection.config.headers['Content-Type'] && (rejection.config.headers['Content-Type'].toLowerCase().indexOf('json') >= 0 || rejection.config.headers['Content-Type'].toLowerCase().indexOf('form') >= 0)) {
+                    $('[jd-disable-on]').removeAttr('disabled');
+                }
+                return $q.reject(rejection);
+            }
+        };
+    }]);
+
+    angular.module('jedi.utilities').config(['$httpProvider', function ($httpProvider) {
+        $httpProvider.interceptors.push('jedi.utilities.DisableInterceptor');
     }]);
 
 });

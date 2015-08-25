@@ -182,5 +182,33 @@ define(['slimscroll', 'angular'], function (app) {
                 }
             }
         }
+    }]).directive("jdDisableOn", ['jedi.utilities.Utilities', '$http', function (Utilities, $http) {
+        return {
+            restrict: "A",
+            link: function (scope, element, attrs, ngModel) {
+                if (!attrs.jdDisableOn) {
+                    attrs.jdDisableOn = 'click';
+                }
+
+                function eventFunc() {
+                    element[0].disabled = true;
+                    element.attr('disabled', true);
+
+                    var isChrome = /chrom(e|ium)/.test(navigator.userAgent.toLowerCase());
+
+                    if (element.is('[type="submit"]') && isChrome) {
+                        element.submit();
+                    }
+                }
+
+                Utilities.bindFirst(element, attrs.jdDisableOn, eventFunc);
+
+                //element.on(attrs.jdDisableOn, function () {
+                //    if ($http.pendingRequests.length == 0) {
+                //        element.removeAttr('disabled');
+                //    }
+                //});
+            }
+        }
     }]);
 });
