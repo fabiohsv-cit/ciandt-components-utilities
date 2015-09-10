@@ -53,10 +53,10 @@ First step: inject ```jedi.utilities.Utilities``` in your component so you can u
    }]);
    ```
    - validateCpf(string): boolean
-      - validate cpf function, return true if it's valid and false if it's invalid
+      - validate cpf function, return true if it's valid or empty and false if it's invalid
 
    - validateCnpj(string): boolean
-      - validate cnpj function, return true if it's valid and false if it's invalid
+      - validate cnpj function, return true if it's valid or empty and false if it's invalid
 
    - ngMaskDefaultAlias: object
       - return the default alias masks from angular-ngMask
