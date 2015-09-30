@@ -94,6 +94,7 @@ First step: inject ```jedi.utilities.Utilities``` in your component so you can u
 
    - jdValidateEquals
       - Sets an "equals" valdation between two fields, emit flag "equal" on ngModel
+
       ```html
       <input ng-model="password">
       <input ng-model="confirmPassword" jd-validate-equals="password">
@@ -104,6 +105,7 @@ First step: inject ```jedi.utilities.Utilities``` in your component so you can u
 
    - jdDynamicDirective
       - This directive can be used to apply another directive dynamically
+
       ```html
       <form jd-dynamic-directive="{{myCtrl.myModel.myFlag == true ? 'jd-modal' : 'jd-panel|ng-controller=myCtrl'}}"...
       ```
@@ -113,6 +115,7 @@ First step: inject ```jedi.utilities.Utilities``` in your component so you can u
 
    - jdAsyncValidate
       - This directive can be used to apply asynchronous validation, for example if your validation is processed with rest api.
+
       ```html
       <input ng-model="cpf" jd-async-validate="checkCpf" jd-async-validate-message="CPF already used by another user">
       ```
@@ -126,10 +129,11 @@ First step: inject ```jedi.utilities.Utilities``` in your component so you can u
           });
         }
       }
-      ``` 
+      ```
       
    - jdSelectSingle
       - This directive can be used inside `<select/>` tag to auto-select the first item in collections that only have a single item. (require ngModel)
+
       ```html
       <select jd-input 
          jd-select-single="baseCtrl.baseModel.items" 
@@ -147,6 +151,7 @@ First step: inject ```jedi.utilities.Utilities``` in your component so you can u
 
    - jdSelected:boolFieldName
       - This filter can be used to select the objects on the given list where the chosen field is true
+
       ```html
       <tr ng-repeat="item in items | selected:'boolFieldName'">
       ```
@@ -157,9 +162,11 @@ First step: inject ```jedi.utilities.Utilities``` in your component so you can u
 
    - jdTranslate:identifier:value
       - This filter can be used to translate values, it's similar to oracle translate.
+
       ```html
       {{value:translate:1:'Value 1':2:'Value 2'}}
       ```
+
    - jdCapitalize:text
       - This filter change the first letter to upper case
 
