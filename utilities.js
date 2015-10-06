@@ -12,6 +12,16 @@ define(['ng-jedi-utilities-directives', 'ng-jedi-utilities-filters', 'ng-jedi-di
 
         var $this = this;
 
+        this.newGuid = function () {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(16)
+                    .substring(1);
+            }
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+                s4() + '-' + s4() + s4() + s4();
+        };
+
         this.wrapElement = function (element, content, prepend) {
             var wrapper = angular.element(content);
             element.after(wrapper);
@@ -27,7 +37,7 @@ define(['ng-jedi-utilities-directives', 'ng-jedi-utilities-filters', 'ng-jedi-di
             var add, i, rev;
             strCPF = strCPF.replace(/[^\d]+/g, '');
             if (strCPF === '') return true;
-            // Elimina CPFs invalidos conhecidos    
+            // Elimina CPFs invalidos conhecidos
             if (strCPF.length != 11 ||
                 strCPF == "00000000000" ||
                 strCPF == "11111111111" ||
@@ -40,7 +50,7 @@ define(['ng-jedi-utilities-directives', 'ng-jedi-utilities-filters', 'ng-jedi-di
                 strCPF == "88888888888" ||
                 strCPF == "99999999999")
                 return false;
-            // Valida 1o digito 
+            // Valida 1o digito
             add = 0;
             for (i = 0; i < 9; i++)
                 add += parseInt(strCPF.charAt(i)) * (10 - i);
@@ -49,7 +59,7 @@ define(['ng-jedi-utilities-directives', 'ng-jedi-utilities-filters', 'ng-jedi-di
                 rev = 0;
             if (rev != parseInt(strCPF.charAt(9)))
                 return false;
-            // Valida 2o digito 
+            // Valida 2o digito
             add = 0;
             for (i = 0; i < 10; i++)
                 add += parseInt(strCPF.charAt(i)) * (11 - i);
@@ -274,6 +284,8 @@ define(['ng-jedi-utilities-directives', 'ng-jedi-utilities-filters', 'ng-jedi-di
 
         this.$get = [function () {
             return {
+                newGuid: $this.newGuid,
+
                 wrapElement: $this.wrapElement,
 
                 validateCpf: $this.validateCpf,

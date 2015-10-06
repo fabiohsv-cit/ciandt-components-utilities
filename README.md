@@ -32,9 +32,12 @@ Utilities to make life easier on settings and other needs during development wit
 ### Functions
 First step: inject ```jedi.utilities.Utilities``` in your component so you can use functions below.
 
+   - newGuid(): string
+      - This is a convenient function that you can call to get a new Guid
+
    - wrapElement(element, content, prepend): element content
       - This function wraps "element" inside "content". The parameter "prepend" indicate if the element will be placed above or below content's children.
-   
+
    ```javascript
    app.directive("yourDirective", ['jedi.utilities.Utilities', function (Utilities) {
       .
@@ -130,18 +133,18 @@ First step: inject ```jedi.utilities.Utilities``` in your component so you can u
         }
       }
       ```
-      
+
    - jdSelectSingle
       - This directive can be used inside `<select/>` tag to auto-select the first item in collections that only have a single item. (require ngModel)
 
       ```html
-      <select jd-input 
-         jd-select-single="baseCtrl.baseModel.items" 
+      <select jd-input
+         jd-select-single="baseCtrl.baseModel.items"
          jd-options="item as item.name for item in baseCtrl.baseModel.items"
-         ng-model="baseCtrl.baseModel.selectItemModel" 
+         ng-model="baseCtrl.baseModel.selectItemModel"
          />
       ```
-     
+
    - jdEnter
       - This directive can be used to run a chosen controller method when the enter key is pressed.
 
