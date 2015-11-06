@@ -8,11 +8,9 @@ Utilities to make life easier on settings and other needs during development wit
    ```shell
    bower install ng-jedi-utilities --save
    ```
-* Add utilities.js, utilities-filters.js and utilities-directives.js to your code:
+* Add utilities.js to your code:
 
    ```html
-   <script src='assets/libs/ng-jedi-utilities/utilities-filters.js'></script>
-   <script src='assets/libs/ng-jedi-utilities/utilities-directives.js'></script>
    <script src='assets/libs/ng-jedi-utilities/utilities.js'></script>
    ```
    - note that the base directory used was assets/libs, you should change bower_components to assets/libs or move from bower_components to assets/libs with [Grunt](http://gruntjs.com/).

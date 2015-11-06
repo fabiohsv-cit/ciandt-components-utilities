@@ -1,7 +1,4 @@
-﻿"use strict";
-
-define(['slimscroll', 'angular'], function (app) {
-    angular.module("jedi.utilities.directives", []).directive("jdSlimScroll", [function () {
+﻿    angular.module("jedi.utilities.directives", []).directive("jdSlimScroll", [function () {
         return {
             restrict: "A",
             link: function (scope, ele, attrs) {
@@ -211,4 +208,3 @@ define(['slimscroll', 'angular'], function (app) {
             }
         }
     }]);
-});

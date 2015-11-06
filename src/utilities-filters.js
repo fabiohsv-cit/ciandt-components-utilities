@@ -1,8 +1,4 @@
-﻿"use strict";
-
-define(['angular'], function () {
-
-    angular.module("jedi.utilities.filters", []).filter('jdSelected', function () {
+﻿    angular.module("jedi.utilities.filters", []).filter('jdSelected', function () {
         return function (list, field) {
             if (!field) {
                 field = 'selected';
@@ -70,4 +66,3 @@ define(['angular'], function () {
             return returnString.replace(/\s/g, $spaceSymbol);
         }
     });
-});
