@@ -2,7 +2,10 @@
                                       'jedi.utilities.directives',
                                       'jedi.utilities.filters']);
 
-    angular.module('jedi.utilities').provider('jedi.utilities.Utilities', ['$provide', function ($provide) {
+    angular.module('jedi.utilities').constant('jedi.utilities.UtilitiesConfig', {
+        yesLabel: 'Yes',
+        noLabel: 'No'
+    }).provider('jedi.utilities.Utilities', ['$provide', function ($provide) {
         var $log = angular.injector(['ng']).get('$log');
         var $interpolate = angular.injector(['ng']).get('$interpolate');
 

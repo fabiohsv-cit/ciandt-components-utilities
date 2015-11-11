@@ -233,14 +233,14 @@
             }
             return _.filter(list, function (item) { return item[field] == true });
         };
-    }).filter('jdBoolToText', ['$injector', function ($injector) {
+    }).filter('jdBoolToText', ['$injector', 'jedi.utilities.UtilitiesConfig', function ($injector, UtilitiesConfig) {
         var localize;
         try {
             localize = $injector.get('jedi.i18n.Localize');
         } catch (e) { }
 
-        var yes = (localize ? (localize.getDefaultLanguage().indexOf('pt') >= 0 ? localize.get("Sim") : localize.get("Yes")) : "Yes");
-        var no = (localize ? (localize.getDefaultLanguage().indexOf('pt') >= 0 ? localize.get("Não") : localize.get("No")) : "No");
+        var yes = (localize ? localize.get(UtilitiesConfig.yesLabel) : UtilitiesConfig.yesLabel);
+        var no = (localize ? localize.get(UtilitiesConfig.noLabel) : UtilitiesConfig.noLabel);
 
         return function (boolValue) {
             if (boolValue === true)
@@ -299,7 +299,10 @@
                                       'jedi.utilities.directives',
                                       'jedi.utilities.filters']);
 
-    angular.module('jedi.utilities').provider('jedi.utilities.Utilities', ['$provide', function ($provide) {
+    angular.module('jedi.utilities').constant('jedi.utilities.UtilitiesConfig', {
+        yesLabel: 'Yes',
+        noLabel: 'No'
+    }).provider('jedi.utilities.Utilities', ['$provide', function ($provide) {
         var $log = angular.injector(['ng']).get('$log');
         var $interpolate = angular.injector(['ng']).get('$interpolate');
 
