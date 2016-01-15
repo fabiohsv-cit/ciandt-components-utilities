@@ -13,7 +13,6 @@ Utilities to make life easier on settings and other needs during development wit
    ```html
    <script src='assets/libs/ng-jedi-utilities/utilities.js'></script>
    ```
-   - note that the base directory used was assets/libs, you should change bower_components to assets/libs or move from bower_components to assets/libs with [Grunt](http://gruntjs.com/).
 * Include module dependency:
 
    ```javascript
