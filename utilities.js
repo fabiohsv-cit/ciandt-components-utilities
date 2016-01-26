@@ -1,5 +1,5 @@
 /*
- ng-jedi-utilities v0.0.1
+ ng-jedi-utilities v0.0.2
  Utilities to make life easier on settings and other needs during development with angularjs
  https://github.com/jediproject/ng-jedi-utilities
 */
@@ -222,6 +222,15 @@
                 //        element.removeAttr('disabled');
                 //    }
                 //});
+            }
+        }
+    }]).directive('autofocus', ['$timeout', function($timeout) {
+        return {
+            restrict: 'A',
+            link : function($scope, $element) {
+                $timeout(function() {
+                    $element[0].focus();
+                });
             }
         }
     }]);

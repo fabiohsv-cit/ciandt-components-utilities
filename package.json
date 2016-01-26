@@ -1,12 +1,11 @@
 {
   "name": "ng-jedi-utilities",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Utilities to make life easier on settings and other needs during development with angularjs",
   "repository": "https://github.com/jediproject/ng-jedi-utilities",
   "license": "MIT",
   "dependencies": {
-    "angular": "^1.4.4",
-    "ng-jedi-dialogs": "^0.0.1"
+    "angular": "^1.4.4"
   },
   "devDependencies": {
     "coffee-script": "~1.6.2",
