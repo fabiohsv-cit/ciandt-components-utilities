@@ -1,5 +1,5 @@
 /*
- ng-jedi-utilities v0.0.2
+ ng-jedi-utilities v0.0.3
  Utilities to make life easier on settings and other needs during development with angularjs
  https://github.com/jediproject/ng-jedi-utilities
 */

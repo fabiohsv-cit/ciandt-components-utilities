@@ -1,6 +1,6 @@
 {
   "name": "ng-jedi-utilities",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Utilities to make life easier on settings and other needs during development with angularjs",
   "repository": "https://github.com/jediproject/ng-jedi-utilities",
   "license": "MIT",
