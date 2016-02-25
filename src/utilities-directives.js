@@ -119,7 +119,7 @@
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
-                element.attr("readonly", "true");
+                element.attr("disabled", "true");
 
                 var dependsOn = attrs.jdDependsOn;
                 if (dependsOn == "") {
@@ -145,9 +145,9 @@
                         }
 
                         if (scanCheckList(checkList)) {
-                            element.removeAttr("readonly");
+                            element.removeAttr("disabled");
                         } else {
-                            element.attr("readonly", "true");
+                            element.attr("disabled", "true");
                         }
                     });
                 });
