@@ -30,14 +30,29 @@
     }]).directive("jdFullScreenPage", function () {
         return {
             restrict: "A",
-            controller: ["$scope", "$element", "$location", function ($scope, $element, $location) {
-                jQuery('body').addClass('body-wide');
+            controller: ["$scope", "$element", "$location", 'jedi.utilities.UtilitiesConfig', function ($scope, $element, $location, UtilitiesConfig) {
+                var clazz = $element.attr('jd-full-screen-page-class');
+                if (!clazz) {
+                    clazz = UtilitiesConfig.wideClass;
+                    if (!clazz) {
+                        clazz = 'body-wide';
+                    }
+                }
+                var selector = $element.attr('jd-full-screen-page-element');
+                if (!selector) {
+                    selector = UtilitiesConfig.wideSelectorElement;
+                    if (!selector) {
+                        selector = 'body';
+                    }
+                }
+
+                jQuery(selector).addClass(clazz);
 
                 $scope.$watch(function () {
                     return $location.path();
                 }, function (newVal, oldVal) {
                     if (newVal !== oldVal) {
-                        jQuery('body').removeClass('body-wide');
+                        jQuery(selector).removeClass(clazz);
                     }
                 });
             }]
