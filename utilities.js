@@ -1,7 +1,7 @@
 /*
- ng-jedi-utilities v0.0.3
+ ng-jedi-utilities v0.0.4
  Utilities to make life easier on settings and other needs during development with angularjs
- https://github.com/jediproject/ng-jedi-utilities
+ 
 */
 (function (factory) {
     if (typeof define === 'function') {
@@ -47,14 +47,29 @@
     }]).directive("jdFullScreenPage", function () {
         return {
             restrict: "A",
-            controller: ["$scope", "$element", "$location", function ($scope, $element, $location) {
-                jQuery('body').addClass('body-wide');
+            controller: ["$scope", "$element", "$location", 'jedi.utilities.UtilitiesConfig', function ($scope, $element, $location, UtilitiesConfig) {
+                var clazz = $element.attr('jd-full-screen-page-class');
+                if (!clazz) {
+                    clazz = UtilitiesConfig.wideClass;
+                    if (!clazz) {
+                        clazz = 'body-wide';
+                    }
+                }
+                var selector = $element.attr('jd-full-screen-page-element');
+                if (!selector) {
+                    selector = UtilitiesConfig.wideSelectorElement;
+                    if (!selector) {
+                        selector = 'body';
+                    }
+                }
+
+                jQuery(selector).addClass(clazz);
 
                 $scope.$watch(function () {
                     return $location.path();
                 }, function (newVal, oldVal) {
                     if (newVal !== oldVal) {
-                        jQuery('body').removeClass('body-wide');
+                        jQuery(selector).removeClass(clazz);
                     }
                 });
             }]
@@ -310,7 +325,11 @@
 
     angular.module('jedi.utilities').constant('jedi.utilities.UtilitiesConfig', {
         yesLabel: 'Yes',
-        noLabel: 'No'
+        noLabel: 'No',
+        pageLoadUnknownError: 'Unknown error during page load.',
+        jsUnknownError: 'Javascript unknown error.',
+        wideClass: 'body-wide',
+        wideSelectorElement: 'body'
     }).provider('jedi.utilities.Utilities', ['$provide', function ($provide) {
         var $log = angular.injector(['ng']).get('$log');
         var $interpolate = angular.injector(['ng']).get('$interpolate');
@@ -510,7 +529,7 @@
         this.applyExceptionHandler = function (handler) {
             $log.info('Registrando mecanismo de exception handler javascript.');
 
-            $provide.decorator("$exceptionHandler", ['$delegate', '$injector', function ($delegate, $injector) {
+            $provide.decorator("$exceptionHandler", ['$delegate', '$injector', 'jedi.utilities.UtilitiesConfig', function ($delegate, $injector, UtilitiesConfig) {
                 return function (exception, cause) {
                     $delegate(exception, cause);
 
@@ -522,13 +541,13 @@
 
                     if (!message) {
                         if (exception && exception.message && exception.message.indexOf('$injector') > -1) {
-                            message = 'Ocorreu algum erro desconhecido durante carregamento da página.';
+                            message = UtilitiesConfig.pageLoadUnknownError;
                         } else
                             if (exception && exception.message && exception.message.indexOf('$compile:tpload')) {
                                 // erro já tratado no handler http, trata-se de pagina template não encontrado.
                                 return;
                             } else {
-                                message = 'Ocorreu algum erro desconhecido de script.';
+                                message = UtilitiesConfig.jsUnknownError;
                             }
                     }
 
