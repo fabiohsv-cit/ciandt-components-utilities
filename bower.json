@@ -8,7 +8,7 @@
   "description": "Utilities to make life easier on settings and other needs during development with angularjs.",
   "main": ["utilities.js", "utilities-directives.js", "utilities-filters.js"],
   "dependencies": {
-	"ng-jedi-dialogs": "*"
+	"ng-jedi-dialogs": "#materialize"
   },
   "moduleType": [
     "globals"
