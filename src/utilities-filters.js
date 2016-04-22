@@ -65,4 +65,13 @@
             }
             return returnString.replace(/\s/g, $spaceSymbol);
         }
-    });
+    }).filter('jdTranslateMonthArray', ['$locale', '$filter', function ($locale, $filter) {
+        return function (monthNumberArray) {
+            var months = $locale.DATETIME_FORMATS.MONTH;
+            var translatedMonths = angular.copy(monthNumberArray);
+            angular.forEach(monthNumberArray, function (month, index) {
+                translatedMonths[index] = $filter('jdCapitalize')(months[month - 1]);
+            });
+            return translatedMonths;
+        }
+    }]);
