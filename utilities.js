@@ -307,6 +307,10 @@
             { val: "", let: "?!()" }
         ];
         return function (str) {
+            if (!str) {
+                return "";
+            }
+            
             var $spaceSymbol = '';
             var regex;
             var returnString = str;
