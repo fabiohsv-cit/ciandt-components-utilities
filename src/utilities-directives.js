@@ -231,4 +231,49 @@
                 });
             }
         }
+    }]).directive("jdClickDisable", ["$parse", function ($parse) {
+        function disableElement(element) {
+            if (element) {
+                element.attr('disabled', true);
+            }
+        }
+        function enableElement(element) {
+            if (element) {
+                element.attr('disabled', false);
+            }
+        }
+        return {
+            restrict: "A",
+            controller: ['$scope', function ($scope) {
+                // indicates if function invoked by the click is currently running
+                this.running = false;
+            }],
+            compile: function ($element, attr) {
+                var fn = $parse(attr.jdClickDisable);
+                return function (scope, element, attr, controller) {
+                    element.on("click", function (event) {
+
+                        // if function is currently running don't execute it again
+                        if (!controller.running) {
+                            scope.$apply(function () {
+
+                                // if invoked function returns a promise wait for it's completion
+                                var func = fn(scope, { $event: event });
+                                if (func && func.finally !== undefined) {
+                                    controller.running = true;
+                                    disableElement($element, true);
+                                    func.finally(function () {
+                                        controller.running = false;
+                                        enableElement($element);
+                                    });
+                                }
+                                else {
+                                    throw "Click function is not a promise, disable will not work";
+                                }
+                            });
+                        }
+                    });
+                };
+            }
+        };
     }]);
