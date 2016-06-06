@@ -145,6 +145,9 @@ First step: inject ```jedi.utilities.Utilities``` in your component so you can u
    - jdEnter
       - This directive can be used to run a chosen controller method when the enter key is pressed.
 
+   - jdClickDisable
+      - This directive can be used to disable buttons when click, function must return a promise and will reenable when promise finish (finally).
+
    **[Back to top](#how-to-use)**
 
 ### Filters
