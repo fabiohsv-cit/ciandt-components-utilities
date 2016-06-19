@@ -15,10 +15,7 @@
         var no = (localize ? localize.get(UtilitiesConfig.noLabel) : UtilitiesConfig.noLabel);
 
         return function (boolValue) {
-            if (boolValue === true)
-                return yes;
-            else
-                return no
+            return boolValue === true ? yes : no;
         }
     }]).filter('jdTranslate', function () {
         return (function (value) {
