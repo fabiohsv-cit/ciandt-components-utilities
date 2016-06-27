@@ -1,5 +1,5 @@
 /*
- ng-jedi-utilities v0.0.8
+ ng-jedi-utilities v0.0.9
  Utilities to make life easier on settings and other needs during development with angularjs
  
 */
@@ -312,10 +312,7 @@
         var no = (localize ? localize.get(UtilitiesConfig.noLabel) : UtilitiesConfig.noLabel);
 
         return function (boolValue) {
-            if (boolValue === true)
-                return yes;
-            else
-                return no
+            return boolValue === true ? yes : no;
         }
     }]).filter('jdTranslate', function () {
         return (function (value) {
